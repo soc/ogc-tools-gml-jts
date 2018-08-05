@@ -33,7 +33,7 @@ public class GML311ToJTSMultiPointConverter
 	@Override
 	protected MultiPoint doCreateGeometry(ObjectLocator locator,
 			MultiPointType multiPointType) throws ConversionFailedException {
-		final List<Point> points = new ArrayList<Point>();
+		final List<Point> points = new ArrayList<>();
 		if (multiPointType.isSetPointMember()) {
 			final List<PointPropertyType> pointMembers = multiPointType
 					.getPointMember();
@@ -64,7 +64,7 @@ public class GML311ToJTSMultiPointConverter
 		if (multiPointType.isSetPointMember()
 				|| multiPointType.isSetPointMembers()) {
 			return getGeometryFactory().createMultiPoint(
-					points.toArray(new Point[points.size()]));
+					points.toArray(new Point[0]));
 		} else {
 			throw new ConversionFailedException(locator,
 					"Either [pointMember] or [pointMembers] elements are expected."); //$NON-NLS-1$

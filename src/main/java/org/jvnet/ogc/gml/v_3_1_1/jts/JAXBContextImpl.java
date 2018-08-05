@@ -40,7 +40,7 @@ public class JAXBContextImpl extends javax.xml.bind.JAXBContext {
 	}
 
 	@Override
-	public Validator createValidator() throws JAXBException {
+	public Validator createValidator() {
 		throw new UnsupportedOperationException();
 	}
 

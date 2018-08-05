@@ -46,7 +46,7 @@ public class GML311ToJTSLinearRingConverter
 					.property(
 							"posOrPointPropertyOrPointRep", linearRingType.getPosOrPointPropertyOrPointRep()); //$NON-NLS-1$
 
-			final List<Coordinate> coordinates = new LinkedList<Coordinate>();
+			final List<Coordinate> coordinates = new LinkedList<>();
 			for (int index = 0; index < linearRingType
 					.getPosOrPointPropertyOrPointRep().size(); index++) {
 				final JAXBElement<?> item = linearRingType
@@ -76,8 +76,7 @@ public class GML311ToJTSLinearRingConverter
 							"Unexpected type."); //$NON-NLS-1$
 				}
 			}
-			final Coordinate[] coordinatesArray = coordinates
-					.toArray(new Coordinate[coordinates.size()]);
+			final Coordinate[] coordinatesArray = coordinates.toArray(new Coordinate[0]);
 			return getGeometryFactory().createLinearRing(coordinatesArray);
 
 		} else if (linearRingType.isSetPosList()) {

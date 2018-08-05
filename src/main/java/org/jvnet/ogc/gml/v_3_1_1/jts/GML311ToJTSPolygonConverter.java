@@ -38,8 +38,7 @@ public class GML311ToJTSPolygonConverter extends
 			throws ConversionFailedException {
 		final LinearRing shell;
 		if (polygonType.isSetExterior()) {
-			final AbstractRingType abstractRingType = ((JAXBElement<? extends AbstractRingType>) polygonType
-					.getExterior().getValue().getRing()).getValue();
+			final AbstractRingType abstractRingType = polygonType.getExterior().getValue().getRing().getValue();
 			if (abstractRingType instanceof LinearRingType) {
 				shell = linearRingConverter
 						.createGeometry(
@@ -73,8 +72,7 @@ public class GML311ToJTSPolygonConverter extends
 		if (polygonType.isSetInterior()) {
 			final ObjectLocator interiorObjectLocator = locator.property(
 					"interior", polygonType.getInterior()); //$NON-NLS-1$
-			final List<LinearRing> holesList = new ArrayList<LinearRing>(
-					polygonType.getInterior().size());
+			final List<LinearRing> holesList = new ArrayList<>(polygonType.getInterior().size());
 			for (int index = 0; index < polygonType.getInterior().size(); index++) {
 				final JAXBElement<AbstractRingPropertyType> ringElement = polygonType
 						.getInterior().get(index);
@@ -101,7 +99,7 @@ public class GML311ToJTSPolygonConverter extends
 				}
 			}
 
-			holes = holesList.toArray(new LinearRing[holesList.size()]);
+			holes = holesList.toArray(new LinearRing[0]);
 		} else {
 			holes = null;
 		}

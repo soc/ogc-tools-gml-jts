@@ -36,8 +36,7 @@ public class GML311ToJTSMultiLineStringConverter
 			throws ConversionFailedException {
 		final List<LineStringPropertyType> lineStringMembers = multiLineStringType
 				.getLineStringMember();
-		final List<LineString> lineStrings = new ArrayList<LineString>(
-				lineStringMembers.size());
+		final List<LineString> lineStrings = new ArrayList<>(lineStringMembers.size());
 		for (int index = 0; index < lineStringMembers.size(); index++) {
 			final LineStringPropertyType lineStringPropertyType = lineStringMembers
 					.get(index);
@@ -54,7 +53,7 @@ public class GML311ToJTSMultiLineStringConverter
 									lineStringType));
 		}
 		return getGeometryFactory().createMultiLineString(
-				lineStrings.toArray(new LineString[lineStrings.size()]));
+				lineStrings.toArray(new LineString[0]));
 	}
 
 	public MultiLineString createGeometry(ObjectLocator locator,

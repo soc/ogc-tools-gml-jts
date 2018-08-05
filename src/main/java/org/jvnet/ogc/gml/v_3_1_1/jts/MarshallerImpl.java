@@ -103,7 +103,7 @@ public class MarshallerImpl implements javax.xml.bind.Marshaller {
 
 	}
 
-	public Node getNode(Object contentTree) throws JAXBException {
+	public Node getNode(Object contentTree) {
 		throw new UnsupportedOperationException();
 	}
 

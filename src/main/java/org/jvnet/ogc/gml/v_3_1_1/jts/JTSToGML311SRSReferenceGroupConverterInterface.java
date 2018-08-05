@@ -6,5 +6,5 @@ import com.vividsolutions.jts.geom.Geometry;
 
 public interface JTSToGML311SRSReferenceGroupConverterInterface {
 
-  public void convert(Geometry source, SRSReferenceGroup target);
+  void convert(Geometry source, SRSReferenceGroup target);
 }

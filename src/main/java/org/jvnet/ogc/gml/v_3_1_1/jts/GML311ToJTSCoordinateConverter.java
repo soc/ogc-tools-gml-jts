@@ -1,31 +1,34 @@
 package org.jvnet.ogc.gml.v_3_1_1.jts;
 
 import java.util.List;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import net.opengis.gml.v_3_1_1.CoordType;
 import net.opengis.gml.v_3_1_1.CoordinatesType;
 import net.opengis.gml.v_3_1_1.DirectPositionListType;
 import net.opengis.gml.v_3_1_1.DirectPositionType;
 
-import org.apache.commons.lang.StringUtils;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
 import com.vividsolutions.jts.geom.Coordinate;
 
 public class GML311ToJTSCoordinateConverter {
+
 	public Coordinate createCoordinate(ObjectLocator locator,
 			DirectPositionType directPositionType)
 			throws ConversionFailedException {
 		final List<Double> value = directPositionType.getValue();
 		final int count = value.size();
 		if (count == 2) {
-			double x = value.get(0).doubleValue();
-			double y = value.get(1).doubleValue();
+			double x = value.get(0);
+			double y = value.get(1);
 			return new Coordinate(x, y);
 		} else if (count == 3) {
-			double x = value.get(0).doubleValue();
-			double y = value.get(1).doubleValue();
-			double z = value.get(2).doubleValue();
+			double x = value.get(0);
+			double y = value.get(1);
+			double z = value.get(2);
 			return new Coordinate(x, y, z);
 
 		} else {
@@ -101,12 +104,15 @@ public class GML311ToJTSCoordinateConverter {
 
 		final String tupleSeparator = ts == null ? " " : ts; //$NON-NLS-1$
 
-		final String[] tuples = StringUtils.split(value, tupleSeparator);
+		final List<String> tuples =
+				Stream.of(value.split(Pattern.quote(tupleSeparator)))
+						.filter(val -> !val.isEmpty())
+						.collect(Collectors.toList());
 
-		final Coordinate[] coordinatesArray = new Coordinate[tuples.length];
-		for (int index = 0; index < tuples.length; index++) {
+		final Coordinate[] coordinatesArray = new Coordinate[tuples.size()];
+		for (int index = 0; index < tuples.size(); index++) {
 			coordinatesArray[index] = createCoordinate(
-					locator.item(index, tuples[index]), tuples[index], ds, cs);
+					locator.item(index, tuples.get(index)), tuples.get(index), ds, cs);
 		}
 		return coordinatesArray;
 	}
@@ -116,15 +122,19 @@ public class GML311ToJTSCoordinateConverter {
 
 		final String coordinateSeparator = cs == null ? "," : cs; //$NON-NLS-1$
 
-		final String[] coordinates = StringUtils.split(value,
-				coordinateSeparator);
+		final List<String> coordinates =
+				Stream.of(value.split(Pattern.quote(coordinateSeparator)))
+						.filter(val -> !val.isEmpty())
+						.collect(Collectors.toList());
 
-		final double[] coordinateComponents = new double[coordinates.length];
-		for (int index = 0; index < coordinates.length; index++) {
+		final double[] coordinateComponents = new double[coordinates.size()];
+
+		for (int index = 0; index < coordinates.size(); index++) {
 			coordinateComponents[index] = createCoordinateComponent(
-					locator.item(index, coordinates[index]),
-					coordinates[index], ds);
+					locator.item(index, coordinates.get(index)),
+					coordinates.get(index), ds);
 		}
+
 		if (coordinateComponents.length == 2) {
 			return new Coordinate(coordinateComponents[0],
 					coordinateComponents[1]);

@@ -2,8 +2,8 @@ package org.jvnet.ogc.gml.v_3_1_1.jts;
 
 import java.text.MessageFormat;
 import java.text.ParseException;
+import java.util.Objects;
 
-import org.apache.commons.lang.Validate;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 
 import net.opengis.gml.v_3_1_1.SRSReferenceGroup;
@@ -21,8 +21,8 @@ public class GML311ToJTSSRIDConverter implements
 
 	public void convert(ObjectLocator locator, SRSReferenceGroup source,
 			Geometry target) throws ConversionFailedException {
-		Validate.notNull(source);
-		Validate.notNull(target);
+		Objects.requireNonNull(source);
+		Objects.requireNonNull(target);
 
 		String srsName = source.getSrsName();
 

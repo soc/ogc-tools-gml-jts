@@ -1,8 +1,7 @@
 package org.jvnet.ogc.gml.v_3_1_1.jts;
 
 import java.text.MessageFormat;
-
-import org.apache.commons.lang.Validate;
+import java.util.Objects;
 
 import net.opengis.gml.v_3_1_1.SRSReferenceGroup;
 
@@ -12,11 +11,11 @@ public class JTSToGML311SRSReferenceGroupConverter
     implements
     JTSToGML311SRSReferenceGroupConverterInterface {
 
-  private String sridPattern = JTSToGML311Constants.DEFAULT_SRID_FORMAT_PATTERN;
+  private final String sridPattern = JTSToGML311Constants.DEFAULT_SRID_FORMAT_PATTERN;
 
   public void convert(Geometry source, SRSReferenceGroup target) {
-    Validate.notNull(source);
-    Validate.notNull(target);
+    Objects.requireNonNull(source);
+    Objects.requireNonNull(target);
 
     if (source.getUserData() instanceof String) {
       target.setSrsName((String) source.getUserData());

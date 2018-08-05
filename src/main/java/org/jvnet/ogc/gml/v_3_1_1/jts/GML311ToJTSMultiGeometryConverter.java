@@ -38,7 +38,7 @@ public class GML311ToJTSMultiGeometryConverter
 			MultiGeometryType multiGeometryType)
 			throws ConversionFailedException {
 
-		final List<Geometry> geometries = new ArrayList<Geometry>();
+		final List<Geometry> geometries = new ArrayList<>();
 
 		if (multiGeometryType.isSetGeometryMember()) {
 			final ObjectLocator geometryMemberLocator = locator.property(
@@ -76,7 +76,7 @@ public class GML311ToJTSMultiGeometryConverter
 			}
 		}
 		return getGeometryFactory().createGeometryCollection(
-				geometries.toArray(new Geometry[geometries.size()]));
+				geometries.toArray(new Geometry[0]));
 	}
 
 	public GeometryCollection createGeometry(ObjectLocator locator,

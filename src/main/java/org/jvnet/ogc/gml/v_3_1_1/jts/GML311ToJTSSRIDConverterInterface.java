@@ -8,6 +8,6 @@ import com.vividsolutions.jts.geom.Geometry;
 
 public interface GML311ToJTSSRIDConverterInterface {
 
-  public void convert(ObjectLocator locator, SRSReferenceGroup source, Geometry target)
+  void convert(ObjectLocator locator, SRSReferenceGroup source, Geometry target)
       throws ConversionFailedException;
 }

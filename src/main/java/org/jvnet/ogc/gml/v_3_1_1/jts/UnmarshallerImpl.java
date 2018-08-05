@@ -71,7 +71,7 @@ public class UnmarshallerImpl implements javax.xml.bind.Unmarshaller {
 			if (declaredType.isAssignableFrom(geometry.getClass())) {
 				@SuppressWarnings("unchecked")
 				final T value = (T) geometry;
-				return new JAXBElement<T>(((JAXBElement<?>) element).getName(),
+				return new JAXBElement<>(((JAXBElement<?>) element).getName(),
 						declaredType, value);
 
 			} else {

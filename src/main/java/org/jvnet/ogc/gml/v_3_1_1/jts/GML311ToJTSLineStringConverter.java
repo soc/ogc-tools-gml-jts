@@ -45,7 +45,7 @@ public class GML311ToJTSLineStringConverter
 			LineStringType lineStringType) throws ConversionFailedException {
 		if (lineStringType.isSetPosOrPointPropertyOrPointRep()) {
 
-			final List<Coordinate> coordinates = new LinkedList<Coordinate>();
+			final List<Coordinate> coordinates = new LinkedList<>();
 			final ObjectLocator fieldLocator = locator
 					.property(
 							"PosOrPointPropertyOrPointRep", lineStringType.getPosOrPointPropertyOrPointRep()); //$NON-NLS-1$
@@ -74,8 +74,7 @@ public class GML311ToJTSLineStringConverter
 							"Unexpected type."); //$NON-NLS-1$
 				}
 			}
-			final Coordinate[] coordinatesArray = coordinates
-					.toArray(new Coordinate[coordinates.size()]);
+			final Coordinate[] coordinatesArray = coordinates.toArray(new Coordinate[0]);
 			return getGeometryFactory().createLineString(coordinatesArray);
 
 		} else if (lineStringType.isSetPosList()) {
