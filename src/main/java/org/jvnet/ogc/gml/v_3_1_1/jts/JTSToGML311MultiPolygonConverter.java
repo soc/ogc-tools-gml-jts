@@ -13,42 +13,34 @@ import com.vividsolutions.jts.geom.MultiPolygon;
 import com.vividsolutions.jts.geom.Polygon;
 
 public class JTSToGML311MultiPolygonConverter
-		extends
-		AbstractJTSToGML311Converter<MultiPolygonType, MultiPolygonPropertyType, MultiPolygon> {
-	private final JTSToGML311ConverterInterface<PolygonType, PolygonPropertyType, Polygon> polygonConverter;
+    extends AbstractJTSToGML311Converter<MultiPolygonType, MultiPolygonPropertyType, MultiPolygon> {
+  private final JTSToGML311ConverterInterface<PolygonType, PolygonPropertyType, Polygon> polygonConverter;
 
-	public JTSToGML311MultiPolygonConverter(
-			ObjectFactoryInterface objectFactory,
-			JTSToGML311SRSReferenceGroupConverterInterface srsReferenceGroupConverter,
-			JTSToGML311ConverterInterface<PolygonType, PolygonPropertyType, Polygon> polygonConverter) {
-		super(objectFactory, srsReferenceGroupConverter);
-		this.polygonConverter = polygonConverter;
-	}
+  public JTSToGML311MultiPolygonConverter(
+      ObjectFactoryInterface objectFactory,
+      JTSToGML311SRSReferenceGroupConverterInterface srsReferenceGroupConverter,
+      JTSToGML311ConverterInterface<PolygonType, PolygonPropertyType, Polygon> polygonConverter) {
+    super(objectFactory, srsReferenceGroupConverter);
+    this.polygonConverter = polygonConverter;
+  }
 
-	@Override
-	protected MultiPolygonType doCreateGeometryType(MultiPolygon multiPolygon) {
-		final MultiPolygonType multiPolygonType = getObjectFactory()
-				.createMultiPolygonType();
-		for (int index = 0; index < multiPolygon.getNumGeometries(); index++) {
-			final Polygon polygon = (Polygon) multiPolygon.getGeometryN(index);
-			multiPolygonType.getPolygonMember().add(
-					polygonConverter.createPropertyType(polygon));
-		}
+  @Override
+  protected MultiPolygonType doCreateGeometryType(MultiPolygon multiPolygon) {
+    final MultiPolygonType multiPolygonType = getObjectFactory().createMultiPolygonType();
+    for (int index = 0; index < multiPolygon.getNumGeometries(); index++) {
+      final Polygon polygon = (Polygon) multiPolygon.getGeometryN(index);
+      multiPolygonType.getPolygonMember().add(polygonConverter.createPropertyType(polygon));
+    }
+    return multiPolygonType;
+  }
 
-		return multiPolygonType;
-	}
+  public MultiPolygonPropertyType createPropertyType(MultiPolygon multiPolygon) {
+    final MultiPolygonPropertyType multiPolygonPropertyType = getObjectFactory().createMultiPolygonPropertyType();
+    multiPolygonPropertyType.setMultiPolygon(createGeometryType(multiPolygon));
+    return multiPolygonPropertyType;
+  }
 
-	public MultiPolygonPropertyType createPropertyType(MultiPolygon multiPolygon) {
-		final MultiPolygonPropertyType multiPolygonPropertyType = getObjectFactory()
-				.createMultiPolygonPropertyType();
-		multiPolygonPropertyType
-				.setMultiPolygon(createGeometryType(multiPolygon));
-		return multiPolygonPropertyType;
-	}
-
-	public JAXBElement<MultiPolygonType> createElement(MultiPolygon multiPolygon) {
-		return getObjectFactory().createMultiPolygon(
-				createGeometryType(multiPolygon));
-	}
-
+  public JAXBElement<MultiPolygonType> createElement(MultiPolygon multiPolygon) {
+    return getObjectFactory().createMultiPolygon(createGeometryType(multiPolygon));
+  }
 }

@@ -7,14 +7,13 @@ import net.opengis.gml.v_3_1_1.AbstractGeometryType;
 import com.vividsolutions.jts.geom.Geometry;
 
 public abstract class AbstractJTSToGML311Converter<G extends AbstractGeometryType, P, J extends Geometry>
-    implements
-    JTSToGML311ConverterInterface<G, P, J> {
+    implements JTSToGML311ConverterInterface<G, P, J> {
 
   private final ObjectFactoryInterface objectFactory;
   private final JTSToGML311SRSReferenceGroupConverterInterface srsReferenceGroupConverter;
 
   public AbstractJTSToGML311Converter(
-		  ObjectFactoryInterface objectFactory,
+      ObjectFactoryInterface objectFactory,
       JTSToGML311SRSReferenceGroupConverterInterface srsReferenceGroupConverter) {
     this.objectFactory = objectFactory;
     this.srsReferenceGroupConverter = srsReferenceGroupConverter;

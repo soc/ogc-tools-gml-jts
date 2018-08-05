@@ -12,5 +12,4 @@ public interface JTSToGML311ConverterInterface<G extends AbstractGeometryType, P
   P createPropertyType(J geometry);
 
   JAXBElement<? extends G> createElement(J geometry);
-
 }

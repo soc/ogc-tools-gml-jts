@@ -13,41 +13,35 @@ import com.vividsolutions.jts.geom.MultiPoint;
 import com.vividsolutions.jts.geom.Point;
 
 public class JTSToGML311MultiPointConverter
-		extends
-		AbstractJTSToGML311Converter<MultiPointType, MultiPointPropertyType, MultiPoint> {
-	private final JTSToGML311ConverterInterface<PointType, PointPropertyType, Point> pointConverter;
+    extends AbstractJTSToGML311Converter<MultiPointType, MultiPointPropertyType, MultiPoint> {
+  private final JTSToGML311ConverterInterface<PointType, PointPropertyType, Point> pointConverter;
 
-	public JTSToGML311MultiPointConverter(
-			ObjectFactoryInterface objectFactory,
-			JTSToGML311SRSReferenceGroupConverterInterface srsReferenceGroupConverter,
-			JTSToGML311ConverterInterface<PointType, PointPropertyType, Point> pointConverter) {
-		super(objectFactory, srsReferenceGroupConverter);
-		this.pointConverter = pointConverter;
-	}
+  public JTSToGML311MultiPointConverter(
+      ObjectFactoryInterface objectFactory,
+      JTSToGML311SRSReferenceGroupConverterInterface srsReferenceGroupConverter,
+      JTSToGML311ConverterInterface<PointType, PointPropertyType, Point> pointConverter) {
+    super(objectFactory, srsReferenceGroupConverter);
+    this.pointConverter = pointConverter;
+  }
 
-	@Override
-	protected MultiPointType doCreateGeometryType(MultiPoint multiPoint) {
-		final MultiPointType multiPointType = getObjectFactory()
-				.createMultiPointType();
+  @Override
+  protected MultiPointType doCreateGeometryType(MultiPoint multiPoint) {
+    final MultiPointType multiPointType = getObjectFactory().createMultiPointType();
 
-		for (int index = 0; index < multiPoint.getNumGeometries(); index++) {
-			final Point point = (Point) multiPoint.getGeometryN(index);
-			multiPointType.getPointMember().add(
-					pointConverter.createPropertyType(point));
-		}
-		return multiPointType;
-	}
+    for (int index = 0; index < multiPoint.getNumGeometries(); index++) {
+      final Point point = (Point) multiPoint.getGeometryN(index);
+      multiPointType.getPointMember().add(pointConverter.createPropertyType(point));
+    }
+    return multiPointType;
+  }
 
-	public MultiPointPropertyType createPropertyType(MultiPoint multiPoint) {
-		final MultiPointPropertyType multiPointPropertyType = getObjectFactory()
-				.createMultiPointPropertyType();
-		multiPointPropertyType.setMultiPoint(createGeometryType(multiPoint));
-		return multiPointPropertyType;
-	}
+  public MultiPointPropertyType createPropertyType(MultiPoint multiPoint) {
+    final MultiPointPropertyType multiPointPropertyType = getObjectFactory().createMultiPointPropertyType();
+    multiPointPropertyType.setMultiPoint(createGeometryType(multiPoint));
+    return multiPointPropertyType;
+  }
 
-	public JAXBElement<MultiPointType> createElement(MultiPoint multiPoint) {
-		return getObjectFactory().createMultiPoint(
-				createGeometryType(multiPoint));
-	}
-
+  public JAXBElement<MultiPointType> createElement(MultiPoint multiPoint) {
+    return getObjectFactory().createMultiPoint(createGeometryType(multiPoint));
+  }
 }

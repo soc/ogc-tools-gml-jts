@@ -28,101 +28,88 @@ import net.opengis.gml.v_3_1_1.PolygonType;
 
 public interface ObjectFactoryInterface {
 
-	CoordType createCoordType();
+  CoordType createCoordType();
 
-	CoordinatesType createCoordinatesType();
+  CoordinatesType createCoordinatesType();
 
-	DirectPositionType createDirectPositionType();
+  DirectPositionType createDirectPositionType();
 
-	DirectPositionListType createDirectPositionListType();
+  DirectPositionListType createDirectPositionListType();
 
-	JAXBElement<DirectPositionType> createPos(DirectPositionType value);
+  JAXBElement<DirectPositionType> createPos(DirectPositionType value);
 
-	PointType createPointType();
+  PointType createPointType();
 
-	JAXBElement<PointType> createPoint(PointType value);
+  JAXBElement<PointType> createPoint(PointType value);
 
-	PointPropertyType createPointPropertyType();
+  PointPropertyType createPointPropertyType();
 
-	JAXBElement<PointPropertyType> createPointProperty(
-			PointPropertyType value);
+  JAXBElement<PointPropertyType> createPointProperty(PointPropertyType value);
 
-	LineStringType createLineStringType();
+  LineStringType createLineStringType();
 
-	JAXBElement<LineStringType> createLineString(LineStringType value);
+  JAXBElement<LineStringType> createLineString(LineStringType value);
 
-	LineStringPropertyType createLineStringPropertyType();
+  LineStringPropertyType createLineStringPropertyType();
 
-	JAXBElement<LineStringPropertyType> createLineStringProperty(
-			LineStringPropertyType value);
+  JAXBElement<LineStringPropertyType> createLineStringProperty(LineStringPropertyType value);
 
-	LinearRingType createLinearRingType();
+  LinearRingType createLinearRingType();
 
-	JAXBElement<LinearRingType> createLinearRing(LinearRingType value);
+  JAXBElement<LinearRingType> createLinearRing(LinearRingType value);
 
-	LinearRingPropertyType createLinearRingPropertyType();
-	
-	JAXBElement<LinearRingPropertyType> createLinearRingProperty(
-			LinearRingPropertyType value);
-	
-	PolygonType createPolygonType();
+  LinearRingPropertyType createLinearRingPropertyType();
 
-	PolygonPropertyType createPolygonPropertyType();
+  JAXBElement<LinearRingPropertyType> createLinearRingProperty(LinearRingPropertyType value);
 
-	JAXBElement<PolygonType> createPolygon(PolygonType value);
+  PolygonType createPolygonType();
 
-	JAXBElement<PolygonPropertyType> createPolygonProperty(
-			PolygonPropertyType value);
+  PolygonPropertyType createPolygonPropertyType();
 
-	MultiPointType createMultiPointType();
+  JAXBElement<PolygonType> createPolygon(PolygonType value);
 
-	JAXBElement<MultiPointType> createMultiPoint(MultiPointType value);
+  JAXBElement<PolygonPropertyType> createPolygonProperty(PolygonPropertyType value);
 
-	MultiPointPropertyType createMultiPointPropertyType();
+  MultiPointType createMultiPointType();
 
-	JAXBElement<MultiPointPropertyType> createMultiPointProperty(
-			MultiPointPropertyType value);
+  JAXBElement<MultiPointType> createMultiPoint(MultiPointType value);
 
-	MultiLineStringType createMultiLineStringType();
+  MultiPointPropertyType createMultiPointPropertyType();
 
-	JAXBElement<MultiLineStringType> createMultiLineString(
-			MultiLineStringType value);
+  JAXBElement<MultiPointPropertyType> createMultiPointProperty(MultiPointPropertyType value);
 
-	MultiLineStringPropertyType createMultiLineStringPropertyType();
+  MultiLineStringType createMultiLineStringType();
 
-	JAXBElement<MultiLineStringPropertyType> createMultiLineStringProperty(
-			MultiLineStringPropertyType value);
+  JAXBElement<MultiLineStringType> createMultiLineString(
+      MultiLineStringType value);
 
-	AbstractRingPropertyType createAbstractRingPropertyType();
+  MultiLineStringPropertyType createMultiLineStringPropertyType();
 
-	JAXBElement<AbstractRingPropertyType> createExterior(
-			AbstractRingPropertyType value);
+  JAXBElement<MultiLineStringPropertyType> createMultiLineStringProperty(MultiLineStringPropertyType value);
 
-	JAXBElement<AbstractRingPropertyType> createInterior(
-			AbstractRingPropertyType value);
+  AbstractRingPropertyType createAbstractRingPropertyType();
 
-	MultiPolygonType createMultiPolygonType();
+  JAXBElement<AbstractRingPropertyType> createExterior(AbstractRingPropertyType value);
 
-	MultiPolygonPropertyType createMultiPolygonPropertyType();
+  JAXBElement<AbstractRingPropertyType> createInterior(AbstractRingPropertyType value);
 
-	JAXBElement<MultiPolygonType> createMultiPolygon(
-			MultiPolygonType value);
+  MultiPolygonType createMultiPolygonType();
 
-	JAXBElement<MultiPolygonPropertyType> createMultiPolygonProperty(
-			MultiPolygonPropertyType value);
+  MultiPolygonPropertyType createMultiPolygonPropertyType();
 
-	MultiGeometryType createMultiGeometryType();
+  JAXBElement<MultiPolygonType> createMultiPolygon(MultiPolygonType value);
 
-	JAXBElement<MultiGeometryType> createMultiGeometry(
-			MultiGeometryType value);
+  JAXBElement<MultiPolygonPropertyType> createMultiPolygonProperty(MultiPolygonPropertyType value);
 
-	MultiGeometryPropertyType createMultiGeometryPropertyType();
+  MultiGeometryType createMultiGeometryType();
 
-	JAXBElement<MultiGeometryPropertyType> createMultiGeometryProperty(
-			MultiGeometryPropertyType value);
+  JAXBElement<MultiGeometryType> createMultiGeometry(MultiGeometryType value);
 
-	GeometryPropertyType createGeometryPropertyType();
+  MultiGeometryPropertyType createMultiGeometryPropertyType();
 
-	JAXBElement<AbstractGeometryType> createGeometry(
-			AbstractGeometryType value);
+  JAXBElement<MultiGeometryPropertyType> createMultiGeometryProperty(MultiGeometryPropertyType value);
+
+  GeometryPropertyType createGeometryPropertyType();
+
+  JAXBElement<AbstractGeometryType> createGeometry(AbstractGeometryType value);
 }

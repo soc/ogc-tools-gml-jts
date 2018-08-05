@@ -8,7 +8,6 @@ import com.vividsolutions.jts.geom.Geometry;
 
 public class NullGML311ToJTSSRIDConverter implements GML311ToJTSSRIDConverterInterface {
 
-  public void convert(ObjectLocator locator, SRSReferenceGroup source, Geometry target) {
-  }
+  public void convert(ObjectLocator locator, SRSReferenceGroup source, Geometry target) {}
 
 }

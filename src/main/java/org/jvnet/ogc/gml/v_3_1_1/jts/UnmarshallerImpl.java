@@ -29,194 +29,178 @@ import com.vividsolutions.jts.geom.Geometry;
 
 public class UnmarshallerImpl implements javax.xml.bind.Unmarshaller {
 
-	private final javax.xml.bind.Unmarshaller unmarshaller;
-	private final GML311ToJTSConverterInterface<AbstractGeometryType, Object, Geometry> converter;
+  private final javax.xml.bind.Unmarshaller unmarshaller;
+  private final GML311ToJTSConverterInterface<AbstractGeometryType, Object, Geometry> converter;
 
-	public UnmarshallerImpl(
-			javax.xml.bind.Unmarshaller unmarshaller,
-			GML311ToJTSConverterInterface<AbstractGeometryType, Object, Geometry> converter) {
-		this.unmarshaller = unmarshaller;
-		this.converter = converter;
-	}
+  public UnmarshallerImpl(
+      javax.xml.bind.Unmarshaller unmarshaller,
+      GML311ToJTSConverterInterface<AbstractGeometryType, Object, Geometry> converter) {
+    this.unmarshaller = unmarshaller;
+    this.converter = converter;
+  }
 
-	public javax.xml.bind.Unmarshaller getUnmarshaller() {
-		return unmarshaller;
-	}
+  public javax.xml.bind.Unmarshaller getUnmarshaller() {
+    return unmarshaller;
+  }
 
-	public GML311ToJTSConverterInterface<AbstractGeometryType, Object, Geometry> getConverter() {
-		return converter;
-	}
+  public GML311ToJTSConverterInterface<AbstractGeometryType, Object, Geometry> getConverter() {
+    return converter;
+  }
 
-	protected Geometry convert(Object element) throws JAXBException {
+  protected Geometry convert(Object element) throws JAXBException {
 
-		Object value = JAXBIntrospector.getValue(element);
+    Object value = JAXBIntrospector.getValue(element);
 
-		try {
-			return getConverter().createGeometry(
-					new DefaultRootObjectLocator(value), value);
-		} catch (ConversionFailedException cfex) {
-			throw new JAXBException(
-					"Could not convert the geometry into a JAXB element.", cfex);
-		}
-	}
+    try {
+      return getConverter().createGeometry(new DefaultRootObjectLocator(value), value);
+    } catch (ConversionFailedException cfex) {
+      throw new JAXBException("Could not convert the geometry into a JAXB element.", cfex);
+    }
+  }
 
-	protected <T> JAXBElement<T> convert(Object element, Class<T> declaredType)
-			throws JAXBException {
-		if (element == null) {
-			return null;
-		}
-		if (element instanceof JAXBElement) {
+  protected <T> JAXBElement<T> convert(Object element, Class<T> declaredType) throws JAXBException {
+    if (element == null) {
+      return null;
+    }
+    if (element instanceof JAXBElement) {
+      final Geometry geometry = convert(element);
+      if (declaredType.isAssignableFrom(geometry.getClass())) {
+        @SuppressWarnings("unchecked") final T value = (T) geometry;
+        return new JAXBElement<>(((JAXBElement<?>) element).getName(), declaredType, value);
+      } else {
+        throw new JAXBException(
+            MessageFormat
+                .format(
+                    "Geometry class [{0}] does not match expected class [0].",
+                    element.getClass().getName(),
+                    JAXBElement.class.getName()));
+      }
+    } else {
+      throw new JAXBException(
+          MessageFormat.format(
+              "Unmarshalled class [{0}] is not an instance of [{1}].",
+              element.getClass().getName(),
+              JAXBElement.class.getName()));
+    }
+  }
 
-			final Geometry geometry = convert(element);
-			if (declaredType.isAssignableFrom(geometry.getClass())) {
-				@SuppressWarnings("unchecked")
-				final T value = (T) geometry;
-				return new JAXBElement<>(((JAXBElement<?>) element).getName(),
-						declaredType, value);
+  public Object unmarshal(File f) throws JAXBException {
+    return convert(getUnmarshaller().unmarshal(f));
+  }
 
-			} else {
-				throw new JAXBException(
-						MessageFormat
-								.format("Geometry class [{0}] does not match expected class [0].",
-										element.getClass().getName(),
-										JAXBElement.class.getName()));
+  public Object unmarshal(InputStream is) throws JAXBException {
+    return convert(getUnmarshaller().unmarshal(is));
+  }
 
-			}
-		} else {
-			throw new JAXBException(MessageFormat.format(
-					"Unmarshalled class [{0}] is not an instance of [{1}].",
-					element.getClass().getName(), JAXBElement.class.getName()));
-		}
-	}
+  public Object unmarshal(Reader reader) throws JAXBException {
+    return convert(getUnmarshaller().unmarshal(reader));
+  }
 
-	public Object unmarshal(File f) throws JAXBException {
-		return convert(getUnmarshaller().unmarshal(f));
-	}
+  public Object unmarshal(URL url) throws JAXBException {
+    return convert(getUnmarshaller().unmarshal(url));
+  }
 
-	public Object unmarshal(InputStream is) throws JAXBException {
-		return convert(getUnmarshaller().unmarshal(is));
-	}
+  public Object unmarshal(InputSource source) throws JAXBException {
+    return convert(getUnmarshaller().unmarshal(source));
+  }
 
-	public Object unmarshal(Reader reader) throws JAXBException {
-		return convert(getUnmarshaller().unmarshal(reader));
-	}
+  public Object unmarshal(Node node) throws JAXBException {
+    return convert(getUnmarshaller().unmarshal(node));
+  }
 
-	public Object unmarshal(URL url) throws JAXBException {
-		return convert(getUnmarshaller().unmarshal(url));
-	}
+  public <T> JAXBElement<T> unmarshal(Node node, Class<T> declaredType) throws JAXBException {
+    return convert(getUnmarshaller().unmarshal(node), declaredType);
+  }
 
-	public Object unmarshal(InputSource source) throws JAXBException {
-		return convert(getUnmarshaller().unmarshal(source));
-	}
+  public Object unmarshal(Source source) throws JAXBException {
+    return convert(getUnmarshaller().unmarshal(source));
+  }
 
-	public Object unmarshal(Node node) throws JAXBException {
-		return convert(getUnmarshaller().unmarshal(node));
-	}
+  public <T> JAXBElement<T> unmarshal(Source source, Class<T> declaredType) throws JAXBException {
+    return convert(getUnmarshaller().unmarshal(source), declaredType);
+  }
 
-	public <T> JAXBElement<T> unmarshal(Node node, Class<T> declaredType)
-			throws JAXBException {
-		return convert(getUnmarshaller().unmarshal(node), declaredType);
-	}
+  public Object unmarshal(XMLStreamReader reader) throws JAXBException {
+    return convert(getUnmarshaller().unmarshal(reader));
+  }
 
-	public Object unmarshal(Source source) throws JAXBException {
-		return convert(getUnmarshaller().unmarshal(source));
-	}
+  public <T> JAXBElement<T> unmarshal(XMLStreamReader reader, Class<T> declaredType) throws JAXBException {
+    return convert(getUnmarshaller().unmarshal(reader), declaredType);
+  }
 
-	public <T> JAXBElement<T> unmarshal(Source source, Class<T> declaredType)
-			throws JAXBException {
-		return convert(getUnmarshaller().unmarshal(source), declaredType);
-	}
+  public Object unmarshal(XMLEventReader reader) throws JAXBException {
+    return convert(getUnmarshaller().unmarshal(reader));
+  }
 
-	public Object unmarshal(XMLStreamReader reader) throws JAXBException {
-		return convert(getUnmarshaller().unmarshal(reader));
-	}
+  public <T> JAXBElement<T> unmarshal(XMLEventReader reader, Class<T> declaredType) throws JAXBException {
+    return convert(getUnmarshaller().unmarshal(reader), declaredType);
+  }
 
-	public <T> JAXBElement<T> unmarshal(XMLStreamReader reader,
-			Class<T> declaredType) throws JAXBException {
-		return convert(getUnmarshaller().unmarshal(reader), declaredType);
-	}
+  public UnmarshallerHandler getUnmarshallerHandler() {
+    return getUnmarshaller().getUnmarshallerHandler();
+  }
 
-	public Object unmarshal(XMLEventReader reader) throws JAXBException {
-		return convert(getUnmarshaller().unmarshal(reader));
-	}
+  @SuppressWarnings("deprecation")
+  public void setValidating(boolean validating) throws JAXBException {
+    getUnmarshaller().setValidating(validating);
+  }
 
-	public <T> JAXBElement<T> unmarshal(XMLEventReader reader,
-			Class<T> declaredType) throws JAXBException {
-		return convert(getUnmarshaller().unmarshal(reader), declaredType);
-	}
+  @SuppressWarnings("deprecation")
+  public boolean isValidating() throws JAXBException {
+    return getUnmarshaller().isValidating();
+  }
 
-	public UnmarshallerHandler getUnmarshallerHandler() {
-		return getUnmarshaller().getUnmarshallerHandler();
-	}
+  public void setEventHandler(ValidationEventHandler handler) throws JAXBException {
+    getUnmarshaller().setEventHandler(handler);
+  }
 
-	@SuppressWarnings("deprecation")
-	public void setValidating(boolean validating) throws JAXBException {
-		getUnmarshaller().setValidating(validating);
+  public ValidationEventHandler getEventHandler() throws JAXBException {
+    return getUnmarshaller().getEventHandler();
+  }
 
-	}
+  public void setProperty(String name, Object value) throws PropertyException {
+    getUnmarshaller().setProperty(name, value);
+  }
 
-	@SuppressWarnings("deprecation")
-	public boolean isValidating() throws JAXBException {
-		return getUnmarshaller().isValidating();
-	}
+  public Object getProperty(String name) throws PropertyException {
+    return getUnmarshaller().getProperty(name);
+  }
 
-	public void setEventHandler(ValidationEventHandler handler)
-			throws JAXBException {
-		getUnmarshaller().setEventHandler(handler);
+  public void setSchema(Schema schema) {
+    getUnmarshaller().setSchema(schema);
+  }
 
-	}
+  public Schema getSchema() {
+    return getUnmarshaller().getSchema();
+  }
 
-	public ValidationEventHandler getEventHandler() throws JAXBException {
-		return getUnmarshaller().getEventHandler();
-	}
+  public void setAdapter(@SuppressWarnings("rawtypes") XmlAdapter adapter) {
+    getUnmarshaller().setAdapter(adapter);
+  }
 
-	public void setProperty(String name, Object value) throws PropertyException {
-		getUnmarshaller().setProperty(name, value);
-	}
+  @SuppressWarnings("rawtypes")
+  public <A extends XmlAdapter> void setAdapter(Class<A> type, A adapter) {
+    getUnmarshaller().setAdapter(type, adapter);
+  }
 
-	public Object getProperty(String name) throws PropertyException {
-		return getUnmarshaller().getProperty(name);
-	}
+  @SuppressWarnings("rawtypes")
+  public <A extends XmlAdapter> A getAdapter(Class<A> type) {
+    return getAdapter(type);
+  }
 
-	public void setSchema(Schema schema) {
-		getUnmarshaller().setSchema(schema);
-	}
+  public void setAttachmentUnmarshaller(AttachmentUnmarshaller au) {
+    getUnmarshaller().setAttachmentUnmarshaller(au);
+  }
 
-	public Schema getSchema() {
-		return getUnmarshaller().getSchema();
-	}
+  public AttachmentUnmarshaller getAttachmentUnmarshaller() {
+    return getUnmarshaller().getAttachmentUnmarshaller();
+  }
 
-	public void setAdapter(@SuppressWarnings("rawtypes") XmlAdapter adapter) {
-		getUnmarshaller().setAdapter(adapter);
+  public void setListener(Listener listener) {
+    getUnmarshaller().setListener(listener);
+  }
 
-	}
-
-	@SuppressWarnings("rawtypes")
-	public <A extends XmlAdapter> void setAdapter(Class<A> type, A adapter) {
-		getUnmarshaller().setAdapter(type, adapter);
-
-	}
-
-	@SuppressWarnings("rawtypes")
-	public <A extends XmlAdapter> A getAdapter(Class<A> type) {
-		return getAdapter(type);
-	}
-
-	public void setAttachmentUnmarshaller(AttachmentUnmarshaller au) {
-		getUnmarshaller().setAttachmentUnmarshaller(au);
-
-	}
-
-	public AttachmentUnmarshaller getAttachmentUnmarshaller() {
-		return getUnmarshaller().getAttachmentUnmarshaller();
-	}
-
-	public void setListener(Listener listener) {
-		getUnmarshaller().setListener(listener);
-	}
-
-	public Listener getListener() {
-		return getUnmarshaller().getListener();
-	}
-
+  public Listener getListener() {
+    return getUnmarshaller().getListener();
+  }
 }
