@@ -19,8 +19,10 @@ public class GML311ToJTSSRIDConverter implements GML311ToJTSSRIDConverterInterfa
   }
 
   public void convert(ObjectLocator locator, SRSReferenceGroup source, Geometry target) throws ConversionFailedException {
-    Objects.requireNonNull(source);
-    Objects.requireNonNull(target);
+    if (source == null)
+      throw new IllegalArgumentException("The validated object is null");
+    if (target == null)
+      throw new IllegalArgumentException("The validated object is null");
 
     String srsName = source.getSrsName();
 

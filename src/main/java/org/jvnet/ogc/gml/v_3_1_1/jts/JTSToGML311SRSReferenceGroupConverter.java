@@ -12,8 +12,10 @@ public class JTSToGML311SRSReferenceGroupConverter implements JTSToGML311SRSRefe
   private final String sridPattern = JTSToGML311Constants.DEFAULT_SRID_FORMAT_PATTERN;
 
   public void convert(Geometry source, SRSReferenceGroup target) {
-    Objects.requireNonNull(source);
-    Objects.requireNonNull(target);
+    if (source == null)
+      throw new IllegalArgumentException("The validated object is null");
+    if (target == null)
+      throw new IllegalArgumentException("The validated object is null");
 
     if (source.getUserData() instanceof String) {
       target.setSrsName((String) source.getUserData());
