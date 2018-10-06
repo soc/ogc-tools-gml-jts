@@ -1,6 +1,6 @@
 package org.jvnet.ogc.gml.v_3_1_1.jts;
 
-import com.vividsolutions.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.GeometryFactory;
 
 public class GML311ToJTSConstants {
 

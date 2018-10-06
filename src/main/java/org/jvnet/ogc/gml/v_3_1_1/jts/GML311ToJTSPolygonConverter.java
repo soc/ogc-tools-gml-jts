@@ -5,18 +5,17 @@ import java.util.List;
 
 import javax.xml.bind.JAXBElement;
 
+import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.LinearRing;
+import org.locationtech.jts.geom.Polygon;
+
 import net.opengis.gml.v_3_1_1.AbstractRingPropertyType;
 import net.opengis.gml.v_3_1_1.AbstractRingType;
 import net.opengis.gml.v_3_1_1.LinearRingPropertyType;
 import net.opengis.gml.v_3_1_1.LinearRingType;
 import net.opengis.gml.v_3_1_1.PolygonPropertyType;
 import net.opengis.gml.v_3_1_1.PolygonType;
-
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.LinearRing;
-import com.vividsolutions.jts.geom.Polygon;
 
 public class GML311ToJTSPolygonConverter
     extends AbstractGML311ToJTSConverter<PolygonType, PolygonPropertyType, Polygon> {
@@ -60,7 +59,7 @@ public class GML311ToJTSPolygonConverter
     final LinearRing[] holes;
     if (polygonType.isSetInterior()) {
       final ObjectLocator interiorObjectLocator = locator.property("interior", polygonType.getInterior()); //$NON-NLS-1$
-      final List<LinearRing> holesList = new ArrayList<>(polygonType.getInterior().size());
+      final List<LinearRing> holesList = new ArrayList<LinearRing>(polygonType.getInterior().size());
       for (int index = 0; index < polygonType.getInterior().size(); index++) {
         final JAXBElement<AbstractRingPropertyType> ringElement = polygonType
             .getInterior().get(index);

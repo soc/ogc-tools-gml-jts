@@ -3,12 +3,11 @@ package org.jvnet.ogc.gml.v_3_1_1.jts;
 import javax.xml.bind.JAXBElement;
 
 import org.jvnet.ogc.gml.v_3_1_1.ObjectFactoryInterface;
+import org.locationtech.jts.geom.LinearRing;
 
 import net.opengis.gml.v_3_1_1.AbstractRingPropertyType;
 import net.opengis.gml.v_3_1_1.DirectPositionType;
 import net.opengis.gml.v_3_1_1.LinearRingType;
-
-import com.vividsolutions.jts.geom.LinearRing;
 
 public class JTSToGML311LinearRingConverter
     extends    AbstractJTSToGML311Converter<LinearRingType, AbstractRingPropertyType, LinearRing> {

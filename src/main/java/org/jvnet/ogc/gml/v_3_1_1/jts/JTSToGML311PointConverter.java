@@ -3,12 +3,11 @@ package org.jvnet.ogc.gml.v_3_1_1.jts;
 import javax.xml.bind.JAXBElement;
 
 import org.jvnet.ogc.gml.v_3_1_1.ObjectFactoryInterface;
+import org.locationtech.jts.geom.Point;
 
 import net.opengis.gml.v_3_1_1.DirectPositionType;
 import net.opengis.gml.v_3_1_1.PointPropertyType;
 import net.opengis.gml.v_3_1_1.PointType;
-
-import com.vividsolutions.jts.geom.Point;
 
 public class JTSToGML311PointConverter extends AbstractJTSToGML311Converter<PointType, PointPropertyType, Point> {
   private final JTSToGML311CoordinateConverter coordinateConverter;

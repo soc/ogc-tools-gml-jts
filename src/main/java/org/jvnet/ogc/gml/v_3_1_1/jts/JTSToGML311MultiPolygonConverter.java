@@ -3,14 +3,13 @@ package org.jvnet.ogc.gml.v_3_1_1.jts;
 import javax.xml.bind.JAXBElement;
 
 import org.jvnet.ogc.gml.v_3_1_1.ObjectFactoryInterface;
+import org.locationtech.jts.geom.MultiPolygon;
+import org.locationtech.jts.geom.Polygon;
 
 import net.opengis.gml.v_3_1_1.MultiPolygonPropertyType;
 import net.opengis.gml.v_3_1_1.MultiPolygonType;
 import net.opengis.gml.v_3_1_1.PolygonPropertyType;
 import net.opengis.gml.v_3_1_1.PolygonType;
-
-import com.vividsolutions.jts.geom.MultiPolygon;
-import com.vividsolutions.jts.geom.Polygon;
 
 public class JTSToGML311MultiPolygonConverter
     extends AbstractJTSToGML311Converter<MultiPolygonType, MultiPolygonPropertyType, MultiPolygon> {

@@ -5,17 +5,16 @@ import java.util.List;
 
 import javax.xml.bind.JAXBElement;
 
+import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.GeometryCollection;
+import org.locationtech.jts.geom.GeometryFactory;
+
 import net.opengis.gml.v_3_1_1.AbstractGeometricAggregateType;
 import net.opengis.gml.v_3_1_1.AbstractGeometryType;
 import net.opengis.gml.v_3_1_1.GeometryPropertyType;
 import net.opengis.gml.v_3_1_1.MultiGeometryPropertyType;
 import net.opengis.gml.v_3_1_1.MultiGeometryType;
-
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.GeometryCollection;
-import com.vividsolutions.jts.geom.GeometryFactory;
 
 @SuppressWarnings("nls")
 public class GML311ToJTSMultiGeometryConverter
@@ -37,7 +36,7 @@ public class GML311ToJTSMultiGeometryConverter
   protected GeometryCollection doCreateGeometry(ObjectLocator locator, MultiGeometryType multiGeometryType)
       throws ConversionFailedException {
 
-    final List<Geometry> geometries = new ArrayList<>();
+    final List<Geometry> geometries = new ArrayList<Geometry>();
 
     if (multiGeometryType.isSetGeometryMember()) {
       final ObjectLocator geometryMemberLocator = locator.property("geometryMember", multiGeometryType.getGeometryMember());

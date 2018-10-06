@@ -3,16 +3,15 @@ package org.jvnet.ogc.gml.v_3_1_1.jts;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.MultiPolygon;
+import org.locationtech.jts.geom.Polygon;
+
 import net.opengis.gml.v_3_1_1.MultiPolygonPropertyType;
 import net.opengis.gml.v_3_1_1.MultiPolygonType;
 import net.opengis.gml.v_3_1_1.PolygonPropertyType;
 import net.opengis.gml.v_3_1_1.PolygonType;
-
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.MultiPolygon;
-import com.vividsolutions.jts.geom.Polygon;
 
 public class GML311ToJTSMultiPolygonConverter
     extends AbstractGML311ToJTSConverter<MultiPolygonType, MultiPolygonPropertyType, MultiPolygon> {
@@ -33,7 +32,7 @@ public class GML311ToJTSMultiPolygonConverter
   protected MultiPolygon doCreateGeometry(ObjectLocator locator,
                                           MultiPolygonType multiPolygonType) throws ConversionFailedException {
     final List<PolygonPropertyType> polygonMembers = multiPolygonType.getPolygonMember();
-    final List<Polygon> polygons = new ArrayList<>(polygonMembers.size());
+    final List<Polygon> polygons = new ArrayList<Polygon>(polygonMembers.size());
     for (int index = 0; index < polygonMembers.size(); index++) {
       final PolygonPropertyType polygonPropertyType = polygonMembers.get(index);
       final PolygonType polygonType = polygonPropertyType.getPolygon();

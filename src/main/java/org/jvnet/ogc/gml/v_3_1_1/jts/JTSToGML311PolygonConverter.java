@@ -3,14 +3,13 @@ package org.jvnet.ogc.gml.v_3_1_1.jts;
 import javax.xml.bind.JAXBElement;
 
 import org.jvnet.ogc.gml.v_3_1_1.ObjectFactoryInterface;
+import org.locationtech.jts.geom.LinearRing;
+import org.locationtech.jts.geom.Polygon;
 
 import net.opengis.gml.v_3_1_1.AbstractRingPropertyType;
 import net.opengis.gml.v_3_1_1.LinearRingType;
 import net.opengis.gml.v_3_1_1.PolygonPropertyType;
 import net.opengis.gml.v_3_1_1.PolygonType;
-
-import com.vividsolutions.jts.geom.LinearRing;
-import com.vividsolutions.jts.geom.Polygon;
 
 public class JTSToGML311PolygonConverter extends AbstractJTSToGML311Converter<PolygonType, PolygonPropertyType, Polygon> {
   private final JTSToGML311ConverterInterface<LinearRingType, AbstractRingPropertyType, LinearRing> linearRingConverter;

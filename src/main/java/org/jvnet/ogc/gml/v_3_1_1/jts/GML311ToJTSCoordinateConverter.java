@@ -1,18 +1,17 @@
 package org.jvnet.ogc.gml.v_3_1_1.jts;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
+import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.locationtech.jts.geom.Coordinate;
 
 import net.opengis.gml.v_3_1_1.CoordType;
 import net.opengis.gml.v_3_1_1.CoordinatesType;
 import net.opengis.gml.v_3_1_1.DirectPositionListType;
 import net.opengis.gml.v_3_1_1.DirectPositionType;
-
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import com.vividsolutions.jts.geom.Coordinate;
 
 public class GML311ToJTSCoordinateConverter {
 
@@ -34,7 +33,6 @@ public class GML311ToJTSCoordinateConverter {
           locator.property("value", value), //$NON-NLS-1$
           "Direct position type is expected to have 2 or 3 items."); //$NON-NLS-1$
     }
-
   }
 
   public Coordinate[] createCoordinates(ObjectLocator locator, DirectPositionListType directPositionListType)
@@ -92,10 +90,9 @@ public class GML311ToJTSCoordinateConverter {
       throws ConversionFailedException {
     final String tupleSeparator = ts == null ? " " : ts; //$NON-NLS-1$
 
-    final List<String> tuples =
-        Stream.of(value.split(Pattern.quote(tupleSeparator)))
-            .filter(val -> !val.isEmpty())
-            .collect(Collectors.toList());
+    final String[] tuplesArray = value.split(Pattern.quote(tupleSeparator));
+    final List<String> tuples = Arrays.asList(tuplesArray);
+    tuples.removeAll(Collections.singletonList(""));
 
     final Coordinate[] coordinatesArray = new Coordinate[tuples.size()];
     for (int index = 0; index < tuples.size(); index++) {
@@ -109,17 +106,16 @@ public class GML311ToJTSCoordinateConverter {
 
     final String coordinateSeparator = cs == null ? "," : cs; //$NON-NLS-1$
 
-    final List<String> coordinates =
-        Stream.of(value.split(Pattern.quote(coordinateSeparator)))
-            .filter(val -> !val.isEmpty())
-            .collect(Collectors.toList());
+    final String[] coordinatesArray = value.split(Pattern.quote(coordinateSeparator));
+    List<String> coordinates = Arrays.asList(coordinatesArray);
+    coordinates.removeAll(Collections.singletonList(""));
+
 
     final double[] coordinateComponents = new double[coordinates.size()];
 
     for (int index = 0; index < coordinates.size(); index++) {
-      coordinateComponents[index] = createCoordinateComponent(
-          locator.item(index, coordinates.get(index)),
-          coordinates.get(index), ds);
+      coordinateComponents[index] =
+          createCoordinateComponent(locator.item(index, coordinates.get(index)), coordinates.get(index), ds);
     }
 
     if (coordinateComponents.length == 2) {

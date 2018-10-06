@@ -1,10 +1,9 @@
 package org.jvnet.ogc.gml.v_3_1_1.jts;
 
 import org.jvnet.ogc.gml.v_3_1_1.ObjectFactoryInterface;
+import org.locationtech.jts.geom.Coordinate;
 
 import net.opengis.gml.v_3_1_1.DirectPositionType;
-
-import com.vividsolutions.jts.geom.Coordinate;
 
 public class JTSToGML311CoordinateConverter {
   private final ObjectFactoryInterface objectFactory;

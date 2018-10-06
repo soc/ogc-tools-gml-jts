@@ -16,13 +16,12 @@ import javax.xml.stream.XMLStreamWriter;
 import javax.xml.transform.Result;
 import javax.xml.validation.Schema;
 
-import net.opengis.gml.v_3_1_1.AbstractGeometryType;
-import net.opengis.gml.v_3_1_1.GeometryPropertyType;
-
+import org.locationtech.jts.geom.Geometry;
 import org.w3c.dom.Node;
 import org.xml.sax.ContentHandler;
 
-import com.vividsolutions.jts.geom.Geometry;
+import net.opengis.gml.v_3_1_1.AbstractGeometryType;
+import net.opengis.gml.v_3_1_1.GeometryPropertyType;
 
 public class MarshallerImpl implements javax.xml.bind.Marshaller {
 

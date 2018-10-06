@@ -5,10 +5,10 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.Validator;
 
+import org.locationtech.jts.geom.Geometry;
+
 import net.opengis.gml.v_3_1_1.AbstractGeometryType;
 import net.opengis.gml.v_3_1_1.GeometryPropertyType;
-
-import com.vividsolutions.jts.geom.Geometry;
 
 @SuppressWarnings("deprecation")
 public class JAXBContextImpl extends javax.xml.bind.JAXBContext {

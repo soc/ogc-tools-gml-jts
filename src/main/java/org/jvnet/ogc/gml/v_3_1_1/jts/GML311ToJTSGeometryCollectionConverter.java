@@ -1,5 +1,11 @@
 package org.jvnet.ogc.gml.v_3_1_1.jts;
 
+import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.locationtech.jts.geom.GeometryCollection;
+import org.locationtech.jts.geom.MultiLineString;
+import org.locationtech.jts.geom.MultiPoint;
+import org.locationtech.jts.geom.MultiPolygon;
+
 import net.opengis.gml.v_3_1_1.AbstractGeometricAggregateType;
 import net.opengis.gml.v_3_1_1.MultiGeometryPropertyType;
 import net.opengis.gml.v_3_1_1.MultiGeometryType;
@@ -9,13 +15,6 @@ import net.opengis.gml.v_3_1_1.MultiPointPropertyType;
 import net.opengis.gml.v_3_1_1.MultiPointType;
 import net.opengis.gml.v_3_1_1.MultiPolygonPropertyType;
 import net.opengis.gml.v_3_1_1.MultiPolygonType;
-
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import com.vividsolutions.jts.geom.GeometryCollection;
-import com.vividsolutions.jts.geom.MultiLineString;
-import com.vividsolutions.jts.geom.MultiPoint;
-import com.vividsolutions.jts.geom.MultiPolygon;
 
 public class GML311ToJTSGeometryCollectionConverter
     implements GML311ToJTSConverterInterface<AbstractGeometricAggregateType, MultiGeometryPropertyType, GeometryCollection> {

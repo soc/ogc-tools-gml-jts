@@ -19,13 +19,12 @@ import javax.xml.stream.XMLStreamReader;
 import javax.xml.transform.Source;
 import javax.xml.validation.Schema;
 
-import net.opengis.gml.v_3_1_1.AbstractGeometryType;
-
 import org.jvnet.jaxb2_commons.locator.DefaultRootObjectLocator;
+import org.locationtech.jts.geom.Geometry;
 import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
-import com.vividsolutions.jts.geom.Geometry;
+import net.opengis.gml.v_3_1_1.AbstractGeometryType;
 
 public class UnmarshallerImpl implements javax.xml.bind.Unmarshaller {
 
@@ -66,7 +65,7 @@ public class UnmarshallerImpl implements javax.xml.bind.Unmarshaller {
       final Geometry geometry = convert(element);
       if (declaredType.isAssignableFrom(geometry.getClass())) {
         @SuppressWarnings("unchecked") final T value = (T) geometry;
-        return new JAXBElement<>(((JAXBElement<?>) element).getName(), declaredType, value);
+        return new JAXBElement<T>(((JAXBElement<?>) element).getName(), declaredType, value);
       } else {
         throw new JAXBException(
             MessageFormat

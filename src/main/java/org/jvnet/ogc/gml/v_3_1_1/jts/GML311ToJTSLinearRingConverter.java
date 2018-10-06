@@ -5,19 +5,18 @@ import java.util.List;
 
 import javax.xml.bind.JAXBElement;
 
+import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.LinearRing;
+import org.locationtech.jts.geom.Point;
+
 import net.opengis.gml.v_3_1_1.CoordType;
 import net.opengis.gml.v_3_1_1.DirectPositionType;
 import net.opengis.gml.v_3_1_1.LinearRingPropertyType;
 import net.opengis.gml.v_3_1_1.LinearRingType;
 import net.opengis.gml.v_3_1_1.PointPropertyType;
 import net.opengis.gml.v_3_1_1.PointType;
-
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.LinearRing;
-import com.vividsolutions.jts.geom.Point;
 
 public class GML311ToJTSLinearRingConverter
     extends AbstractGML311ToJTSConverter<LinearRingType, LinearRingPropertyType, LinearRing> {
@@ -44,7 +43,7 @@ public class GML311ToJTSLinearRingConverter
       final ObjectLocator fieldLocator = locator
           .property("posOrPointPropertyOrPointRep", linearRingType.getPosOrPointPropertyOrPointRep()); //$NON-NLS-1$
 
-      final List<Coordinate> coordinates = new LinkedList<>();
+      final List<Coordinate> coordinates = new LinkedList<Coordinate>();
       for (int index = 0; index < linearRingType.getPosOrPointPropertyOrPointRep().size(); index++) {
         final JAXBElement<?> item = linearRingType.getPosOrPointPropertyOrPointRep().get(index);
         final ObjectLocator itemLocator = fieldLocator.item(index, item);

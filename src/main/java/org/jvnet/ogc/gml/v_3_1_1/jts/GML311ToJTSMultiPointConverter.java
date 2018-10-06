@@ -3,16 +3,15 @@ package org.jvnet.ogc.gml.v_3_1_1.jts;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.MultiPoint;
+import org.locationtech.jts.geom.Point;
+
 import net.opengis.gml.v_3_1_1.MultiPointPropertyType;
 import net.opengis.gml.v_3_1_1.MultiPointType;
 import net.opengis.gml.v_3_1_1.PointPropertyType;
 import net.opengis.gml.v_3_1_1.PointType;
-
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.MultiPoint;
-import com.vividsolutions.jts.geom.Point;
 
 public class GML311ToJTSMultiPointConverter
     extends
@@ -33,7 +32,7 @@ public class GML311ToJTSMultiPointConverter
   @Override
   protected MultiPoint doCreateGeometry(ObjectLocator locator,
                                         MultiPointType multiPointType) throws ConversionFailedException {
-    final List<Point> points = new ArrayList<>();
+    final List<Point> points = new ArrayList<Point>();
     if (multiPointType.isSetPointMember()) {
       final List<PointPropertyType> pointMembers = multiPointType.getPointMember();
       for (int index = 0; index < pointMembers.size(); index++) {

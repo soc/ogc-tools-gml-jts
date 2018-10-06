@@ -5,20 +5,19 @@ import java.util.List;
 
 import javax.xml.bind.JAXBElement;
 
+import org.jvnet.jaxb2_commons.locator.ItemObjectLocator;
+import org.jvnet.jaxb2_commons.locator.ObjectLocator;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.LineString;
+import org.locationtech.jts.geom.Point;
+
 import net.opengis.gml.v_3_1_1.CoordType;
 import net.opengis.gml.v_3_1_1.DirectPositionType;
 import net.opengis.gml.v_3_1_1.LineStringPropertyType;
 import net.opengis.gml.v_3_1_1.LineStringType;
 import net.opengis.gml.v_3_1_1.PointPropertyType;
 import net.opengis.gml.v_3_1_1.PointType;
-
-import org.jvnet.jaxb2_commons.locator.ItemObjectLocator;
-import org.jvnet.jaxb2_commons.locator.ObjectLocator;
-
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.LineString;
-import com.vividsolutions.jts.geom.Point;
 
 public class GML311ToJTSLineStringConverter
     extends
@@ -43,7 +42,7 @@ public class GML311ToJTSLineStringConverter
   protected LineString doCreateGeometry(ObjectLocator locator, LineStringType lineStringType)
       throws ConversionFailedException {
     if (lineStringType.isSetPosOrPointPropertyOrPointRep()) {
-      final List<Coordinate> coordinates = new LinkedList<>();
+      final List<Coordinate> coordinates = new LinkedList<Coordinate>();
       final ObjectLocator fieldLocator = locator
           .property("PosOrPointPropertyOrPointRep", lineStringType.getPosOrPointPropertyOrPointRep()); //$NON-NLS-1$
       for (int index = 0; index < lineStringType.getPosOrPointPropertyOrPointRep().size(); index++) {

@@ -3,14 +3,13 @@ package org.jvnet.ogc.gml.v_3_1_1.jts;
 import javax.xml.bind.JAXBElement;
 
 import org.jvnet.ogc.gml.v_3_1_1.ObjectFactoryInterface;
+import org.locationtech.jts.geom.LineString;
+import org.locationtech.jts.geom.MultiLineString;
 
 import net.opengis.gml.v_3_1_1.LineStringPropertyType;
 import net.opengis.gml.v_3_1_1.LineStringType;
 import net.opengis.gml.v_3_1_1.MultiLineStringPropertyType;
 import net.opengis.gml.v_3_1_1.MultiLineStringType;
-
-import com.vividsolutions.jts.geom.LineString;
-import com.vividsolutions.jts.geom.MultiLineString;
 
 public class JTSToGML311MultiLineStringConverter
     extends AbstractJTSToGML311Converter<MultiLineStringType, MultiLineStringPropertyType, MultiLineString> {

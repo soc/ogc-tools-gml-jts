@@ -1,10 +1,9 @@
 package org.jvnet.ogc.gml.v_3_1_1.jts;
 
 import org.jvnet.ogc.gml.v_3_1_1.ObjectFactoryInterface;
+import org.locationtech.jts.geom.Geometry;
 
 import net.opengis.gml.v_3_1_1.AbstractGeometryType;
-
-import com.vividsolutions.jts.geom.Geometry;
 
 public abstract class AbstractJTSToGML311Converter<G extends AbstractGeometryType, P, J extends Geometry>
     implements JTSToGML311ConverterInterface<G, P, J> {
