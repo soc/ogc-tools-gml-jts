@@ -13,9 +13,8 @@ lazy val root = (project in file("."))
     // It can also be changed to point to a different Java version.
     //javaHome             := Some(file("/home/soc/apps/zulu8.33.0.1-jdk8.0.192-linux_x64/")),
     libraryDependencies  += "jakarta.xml.bind"        % "jakarta.xml.bind-api" % "2.3.3",
-    libraryDependencies  += "org.jvnet.jaxb2_commons" % "jaxb2-basics-runtime" % "1.11.1",
-    libraryDependencies  += "org.jvnet.ogc"           % "gml-v_3_1_1-schema"   % "1.1.0",
-    libraryDependencies  += "org.locationtech.jts"    % "jts-core"             % "1.17.1",
+    libraryDependencies  += "org.jvnet.ogc"           % "gml-v_3_1_1"          % "2.6.1",
+    libraryDependencies  += "org.locationtech.jts"    % "jts-core"             % "1.18.0",
     testOptions in Test  := Seq(Tests.Argument(TestFrameworks.JUnit, "-a")),
     /*
     publishTo            := {

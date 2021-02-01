@@ -4,13 +4,11 @@ import java.text.MessageFormat;
 
 import org.locationtech.jts.geom.Geometry;
 
-import net.opengis.gml.v_3_1_1.SRSReferenceGroup;
+import net.opengis.gml.v_3_1_1.AbstractGeometryType;
 
 public class JTSToGML311SRSReferenceGroupConverter implements JTSToGML311SRSReferenceGroupConverterInterface {
 
-  private final String sridPattern = JTSToGML311Constants.DEFAULT_SRID_FORMAT_PATTERN;
-
-  public void convert(Geometry source, SRSReferenceGroup target) {
+  public void convert(Geometry source, AbstractGeometryType target) {
     if (source == null)
       throw new IllegalArgumentException("The validated object is null");
     if (target == null)
@@ -19,7 +17,8 @@ public class JTSToGML311SRSReferenceGroupConverter implements JTSToGML311SRSRefe
     if (source.getUserData() instanceof String) {
       target.setSrsName((String) source.getUserData());
     } else if (source.getSRID() != 0) {
-      target.setSrsName(MessageFormat.format(this.sridPattern, source.getSRID()));
+      target.setSrsName(MessageFormat.format(JTSToGML311Constants.DEFAULT_SRID_FORMAT_PATTERN, source.getSRID()));
     }
   }
+
 }

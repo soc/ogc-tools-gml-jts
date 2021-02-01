@@ -6,7 +6,7 @@ import java.text.ParseException;
 import org.jvnet.jaxb2_commons.locator.ObjectLocator;
 import org.locationtech.jts.geom.Geometry;
 
-import net.opengis.gml.v_3_1_1.SRSReferenceGroup;
+import net.opengis.gml.v_3_1_1.AbstractGeometryType;
 
 public class GML311ToJTSSRIDConverter implements GML311ToJTSSRIDConverterInterface {
 
@@ -16,7 +16,7 @@ public class GML311ToJTSSRIDConverter implements GML311ToJTSSRIDConverterInterfa
     this.patterns = patterns;
   }
 
-  public void convert(ObjectLocator locator, SRSReferenceGroup source, Geometry target) throws ConversionFailedException {
+  public void convert(ObjectLocator locator, AbstractGeometryType source, Geometry target) throws ConversionFailedException {
     if (source == null)
       throw new IllegalArgumentException("The validated object is null");
     if (target == null)
@@ -49,4 +49,5 @@ public class GML311ToJTSSRIDConverter implements GML311ToJTSSRIDConverterInterfa
       }
     }
   }
+
 }
