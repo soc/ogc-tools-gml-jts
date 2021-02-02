@@ -4,7 +4,7 @@ lazy val root = (project in file("."))
     organization         := "io.github.soc",
     managedScalaInstance := false,
     crossPaths           := false,
-    version              := "1.2.0",
+    version              := "2.0.0",
     homepage             := Some(url("https://github.com/soc/ogc-tools-gml-jts")),
     licenses             := Seq("BSD" -> url("https://directory.fsf.org/wiki/License:BSD-2-Clause")),
     fork                 := true,
@@ -40,7 +40,7 @@ lazy val root = (project in file("."))
           <name>Simon Ochsenreither</name>
           <url>https://github.com/soc</url>
           <roles>
-            <role>Developer</role>
+            <role>current maintainer</role>
           </roles>
         </developer>
       </developers>
